@@ -1,12 +1,12 @@
 # hustle-kits-sites
 
-Sites and checkout code for the Hustle kits. One Stripe account and one bank deposit for all kits. Kits are separated by product names and by the `kit` metadata tag on every Stripe object.
+Sites and checkout code for the Hustle kits. One Stripe account and one bank deposit for all kits. Kits are separated by product names.
 
 ## Layout
 - `bbq-hustle/`: BBQ Hustle kit site (Cloudflare Pages project `bbq-hustle`, serves thebbqhustle.com)
 - `farmstand-hustle/`: Farmstand Hustle kit site (not yet built)
 - `sidegig-hustle/`: SideGig Hustle kit site (not yet built)
-- `shared/`: checkout and webhook code used by all kits (not yet built)
+- `shared/`: checkout and webhook code used by all kits (built for BBQ Hustle; see `docs/deploy-note-bbq-checkout.md`)
 - `docs/`: briefs and notes
 
 ## Rules
