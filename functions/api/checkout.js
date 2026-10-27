@@ -24,7 +24,7 @@ export async function onRequest({ request, env }) {
       { price: cfg.prices.comboKit, quantity: 1 },
       { price: cfg.prices.comboBoosters, quantity: 1 },
     ];
-    params.success_url = `${origin}/thank-you`;
+    params.success_url = `${origin}/combo-thank-you`;
     params.cancel_url = origin;
     // Checkout can't take both a preset discount and a promo box. Until the coupon
     // expires, apply it automatically; afterwards let buyers enter codes.
