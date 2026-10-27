@@ -38,6 +38,10 @@
   .steps li{background:var(--ink-2);border:1px solid #40332690;border-radius:4px;padding:16px 18px;margin-bottom:12px;font-size:15px;line-height:1.6;color:var(--muted-dark);}
   .steps b{color:var(--cream);}
   .code-note{margin-top:22px;font-size:14.5px;line-height:1.6;color:var(--muted-dark);}
+  button.btn{border:0;cursor:pointer;font-family:inherit;}
+  .field{display:block;font-size:14.5px;color:var(--muted-dark);margin:0 0 8px;}
+  .email{display:block;width:100%;max-width:380px;padding:14px 16px;font-size:16px;border-radius:3px;border:1px solid #5a4636;background:var(--ink);color:var(--cream);margin:0 0 16px;font-family:inherit;}
+  .form-error{color:var(--ember-2);font-size:14.5px;margin:0 0 12px;}
   .fallback{font-size:14.5px;line-height:1.6;color:var(--muted);margin:0 0 20px;}
   .new{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 56px;}
   footer{background:var(--cream-2);padding:28px 0;font-size:14px;color:var(--muted);text-align:center;}
@@ -67,7 +71,14 @@
         <p class="price">$15<small> /month for 12 months</small></p>
         <p class="code-note" style="margin-top:20px;">Boosters is for Kit owners. Use the same email address you used for your Kit purchase, so we can match your account.</p>
 
-        <p style="margin-top:26px;"><a class="btn" href="/api/checkout?plan=boosters">Get Boosters</a></p>
+        <p class="form-error" id="email-error" hidden>That email address didn't look right. Please try again.</p>
+        <form method="post" action="/api/checkout" style="margin-top:26px;">
+          <input type="hidden" name="plan" value="boosters">
+          <label class="field" for="boosters-email">The email you used for your Kit purchase</label>
+          <input class="email" id="boosters-email" type="email" name="email" autocomplete="email" required>
+          <button class="btn" type="submit">Get Boosters</button>
+        </form>
+        <script>if(location.search.indexOf("error=email")>-1)document.getElementById("email-error").hidden=false;</script>
       </div>
 
       <p class="fallback">Can't find your code, or it isn't working? Email <a href="mailto:hello@thebbqhustle.com?subject=BOOSTER">hello@thebbqhustle.com</a> with BOOSTER in the subject line and your Kit receipt number, and we'll send your Boosters link.</p>

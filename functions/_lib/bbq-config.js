@@ -10,6 +10,7 @@ export const BBQ = {
       comboKit: 'price_1UUuTvHul7zqmXuKo4mkVmak', // $87 one-time
       comboBoosters: 'price_1UUtgWHul7zqmXuKxXwctylL', // $15/month
     },
+    kitProduct: 'prod_VIr8uTdugWwOqn', // kit-only product, used to verify a buyer owns the kit
     // product id -> plan name, used by the webhook to decide what gets a schedule
     products: {
       prod_VIrAiHc6lQaAEX: 'boosters',
@@ -24,6 +25,7 @@ export const BBQ = {
       comboKit: 'price_1UUzN0Hul7zqmXuKBLZrSHj3',
       comboBoosters: 'price_1UUzN0Hul7zqmXuKZA7A2anG',
     },
+    kitProduct: 'prod_VTdV47osuRkCNM',
     products: {
       prod_VTfC9UvHfD9KPB: 'boosters',
       prod_VW1PR4ctm5YHm9: 'combo',
