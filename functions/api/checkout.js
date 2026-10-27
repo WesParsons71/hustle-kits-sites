@@ -15,9 +15,8 @@ export async function onRequest({ request, env }) {
 
   const params = { mode: 'subscription' };
   if (plan === 'boosters') {
-    if (!env.BOOSTERS_WELCOME_URL) return new Response('BOOSTERS_WELCOME_URL is not set', { status: 500 });
     params.line_items = [{ price: cfg.prices.boosters, quantity: 1 }];
-    params.success_url = env.BOOSTERS_WELCOME_URL;
+    params.success_url = env.BOOSTERS_WELCOME_URL || `${origin}/boosters-welcome`;
     params.cancel_url = `${origin}/boosters`;
   } else {
     // Kit's one-time price rides on the first invoice with the monthly Boosters price.

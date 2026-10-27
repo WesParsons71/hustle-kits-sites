@@ -4,7 +4,7 @@
 - `functions/api/checkout.js`: `/api/checkout?plan=boosters|combo` creates a Stripe Checkout Session (subscription mode) and redirects to it. Kit-only stays on its Payment Link.
 - `functions/api/stripe-webhook.js`: verifies the signature, fetches the full object, and gives each new Boosters/combo subscription a Subscription Schedule (one phase, 12 iterations, end behavior `cancel`). Idempotent via existing-schedule check plus Stripe idempotency keys.
 - `functions/_lib/`: Stripe helpers and the BBQ price/product config.
-- Site: Boosters button on `boosters.html` and combo button on `index.html` now point at `/api/checkout`.
+- Site: new `boosters-welcome.html` (post-Boosters confirmation); thank-you's Get Boosters button goes straight to checkout; Boosters button on `boosters.html` and combo button on `index.html` now point at `/api/checkout`.
 - `tests/stripe.test.mjs`: local checks for signature verification and form encoding (`node tests/stripe.test.mjs`).
 
 ## Environment variables (Cloudflare Pages, project `bbq-hustle`, set as secrets)
@@ -13,7 +13,7 @@
 | `STRIPE_MODE` | `test` (default) or `live` |
 | `STRIPE_SECRET_KEY_TEST` / `STRIPE_SECRET_KEY_LIVE` | secret keys |
 | `STRIPE_WEBHOOK_SECRET_TEST` / `STRIPE_WEBHOOK_SECRET_LIVE` | `whsec_...` per endpoint |
-| `BOOSTERS_WELCOME_URL` | where Boosters-only buyers land. Not set yet; checkout refuses without it |
+| `BOOSTERS_WELCOME_URL` | optional, defaults to `/boosters-welcome` |
 | `SITE_URL` | optional, defaults to the request origin |
 | `AUDIT` | optional KV binding for the audit log |
 
