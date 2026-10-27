@@ -3,7 +3,7 @@
 // 12 monthly payments. Events are only a pointer: the full object is always fetched from the API,
 // so thin and snapshot payloads both work. Safe to replay: all writes are idempotent.
 import { stripe, secrets, stripeMode, verifySignature } from '../_lib/stripe.js';
-import { BBQ, SCHEDULE_ITERATIONS } from '../_lib/bbq-config.js';
+import { BBQ, SCHEDULE_MONTHS } from '../_lib/bbq-config.js';
 
 export async function onRequestPost({ request, env }) {
   const body = await request.text();
@@ -50,7 +50,7 @@ async function ensureSchedule(env, subscriptionId) {
       phases: [{
         start_date: schedule.phases[0].start_date,
         items: [{ price: item.price.id, quantity: 1 }],
-        iterations: SCHEDULE_ITERATIONS,
+        duration: { interval: 'month', interval_count: SCHEDULE_MONTHS },
       }],
     }, { idempotencyKey: `hk-sched-set-${schedule.id}` });
   }
