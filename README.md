@@ -9,6 +9,9 @@ Sites and checkout code for the Hustle kits. One Stripe account and one bank dep
 - `shared/`: checkout and webhook code used by all kits (not yet built)
 - `docs/`: briefs and notes
 
+## Content
+Build the Business is one shared package; each kit topic is its own package. See `docs/kit-content-strategy.md`.
+
 ## Rules
 - Work on a branch. Merge to `main` only after testing in Stripe test mode and Wes's approval.
 - Never commit keys, customer data or receipts. Stripe keys live in Cloudflare environment variables for each project.
