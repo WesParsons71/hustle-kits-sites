@@ -15,11 +15,19 @@ export function classifyBuyer(sessions, cfg) {
   return { hasKit, hasBoosters };
 }
 
-// Stripe matches customer_details.email case-sensitively, so try the email as typed and lowercased.
-export async function lookupBuyer(env, cfg, rawEmail) {
+// Stripe matches customer_details.email case-sensitively, and stores it with the domain lowercased
+// but the part before the @ exactly as the buyer typed it. So try: as typed, domain lowercased
+// (what Stripe stores), and fully lowercased.
+export function emailVariants(rawEmail) {
   const typed = rawEmail.trim();
+  const at = typed.lastIndexOf('@');
+  const domainLowered = at < 0 ? typed : `${typed.slice(0, at)}@${typed.slice(at + 1).toLowerCase()}`;
+  return [...new Set([typed, domainLowered, typed.toLowerCase()])];
+}
+
+export async function lookupBuyer(env, cfg, rawEmail) {
   const sessions = new Map();
-  for (const email of new Set([typed, typed.toLowerCase()])) {
+  for (const email of emailVariants(rawEmail)) {
     const res = await stripe(env, 'GET', '/checkout/sessions', {
       customer_details: { email },
       limit: 100,

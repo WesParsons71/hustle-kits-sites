@@ -1,6 +1,6 @@
 // Run: node tests/buyer.test.mjs  (no Stripe needed)
 import assert from 'node:assert/strict';
-import { classifyBuyer } from '../functions/_lib/buyer.js';
+import { classifyBuyer, emailVariants } from '../functions/_lib/buyer.js';
 import { BBQ } from '../functions/_lib/bbq-config.js';
 
 for (const mode of ['test', 'live']) {
@@ -21,4 +21,7 @@ for (const mode of ['test', 'live']) {
   assert.equal(classifyBuyer([session(cfg.kitProduct, { status: 'open' })], cfg).hasKit, false, `${mode}: abandoned checkout`);
   assert.equal(classifyBuyer([session('prod_other')], cfg).hasKit, false, `${mode}: some other product`);
 }
+assert.deepEqual(emailVariants('  Kit.Tester@Example.COM '),
+  ['Kit.Tester@Example.COM', 'Kit.Tester@example.com', 'kit.tester@example.com'], 'domain lowercased, name part kept');
+assert.deepEqual(emailVariants('wes@x.com'), ['wes@x.com'], 'already lowercase');
 console.log('ok');
