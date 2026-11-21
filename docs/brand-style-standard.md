@@ -2,7 +2,7 @@
 
 One standard for everything we write for the kits: documents, spreadsheets, and (where it applies) web pages. It is taken from the live site's CSS (`bbq-hustle/index.html`), so documents and sheets match the website.
 
-Applied so far: the Meat Cost Calculator (all tabs) and its guide, "How to Use the Meat Cost Calculator". Everything else in the kit still needs to be brought into line (see "Rollout" at the end).
+Applied so far: the Meat Cost Calculator (all tabs), its guide "How to Use the Meat Cost Calculator", and (as a pilot) the Start Here document and the Brisket chapter. The rest of the master documents still need to be brought into line (see "Rollout" at the end).
 
 ## Palette
 
@@ -25,7 +25,7 @@ Applied so far: the Meat Cost Calculator (all tabs) and its guide, "How to Use t
 
 | Element | Style |
 |---|---|
-| Page background | Cream |
+| Page background | White (documents are printed, so no tint). Cream is for on-screen spreadsheets only |
 | Title (Heading 1) | Fraunces 28 pt, bold, Ink |
 | Subtitle | Work Sans 12 pt, italic, Muted |
 | Section heading (Heading 2) | Fraunces 18 pt, bold, Ember, 1.5 pt Ember rule underneath, 24 pt above, 8 pt below |
@@ -56,8 +56,9 @@ Applied so far: the Meat Cost Calculator (all tabs) and its guide, "How to Use t
 
 ## Naming and capitalization
 
-- **A menu item used as a name is capitalized**, exactly as it appears in the calculator's item list: Brisket, Pulled pork, Pulled chicken, Hot dogs, Meatballs, Ribs, Smash burger.
-- **A count or an ordinary noun stays lowercase**: "3 meatballs each", "2 ribs per portion", "a hot dog".
+- **Brisket is always capitalized**, in headings and in running prose, as if it were a proper name ("Rest the Brisket", "Texas-style Brisket").
+- **Other menu items used as names are capitalized**, exactly as they appear in the calculator's item list: Pulled pork, Pulled chicken, Hot dogs, Meatballs, Ribs, Smash burger.
+- **A count stays lowercase**: "3 meatballs each", "2 ribs per portion", "a hot dog".
 - Titles and headings use sentence case ("Set up once: My Prices"), except the three names the whole kit shares: The BBQ Hustle, Build the Business, Master the Smoke.
 - Tab, section and field names are written as they appear in the sheet, with their capitals.
 
@@ -67,9 +68,13 @@ Applied so far: the Meat Cost Calculator (all tabs) and its guide, "How to Use t
 - Money in US dollars. Weights in pounds and ounces. The kit's buyers are mostly American.
 - Worked examples use numbers that have been checked against the calculator. Never invent a price, a statistic or an award.
 
-## Rollout (what is not yet in this standard)
+## Rollout
 
-- The Master the Smoke chapters, Start Here, Welcome and the Table of Contents (Google Docs).
-- The Build the Business modules and worksheets (Word files; many are locked and read-only, and Module 12 is approved and locked).
-- The Module 10 dashboard (Excel file).
-- Any web page copy.
+Master set: the "2 BBQ Hustle" folder inside "BBQ Hustle - DELIVERY (staging)". The older duplicates in the main BBQ Hustle folder are not the master.
+
+- Done: Start Here, the Brisket chapter, the Meat Cost Calculator and its guide.
+- To do (Google Docs, awaiting approval of the pilot): Welcome, the Table of Contents, and the other nine Master the Smoke chapters.
+- Leave alone: the Build the Business modules and worksheets (Word files, locked or approved; handled separately by the owner), and the Module 10 dashboard.
+- Any web page copy is out of scope for now.
+
+How a chapter is restyled: real heading styles replace bold-only lines, empty spacer paragraphs are removed (no text changes), and the text is otherwise left exactly as written.
