@@ -57,7 +57,7 @@ Applied so far: the Meat Cost Calculator (all tabs), its guide "How to Use the M
 ## Naming and capitalization
 
 - **Brisket is always capitalized**, in headings and in running prose, as if it were a proper name ("Rest the Brisket", "Texas-style Brisket").
-- **Other menu items used as names are capitalized**, exactly as they appear in the calculator's item list: Pulled pork, Pulled chicken, Hot dogs, Meatballs, Ribs, Smash burger.
+- **Other menu items used as names are Title Case**, exactly as they appear in the calculator's item list: Pulled Pork, Pulled Chicken, Hot Dogs, Meatballs, Ribs, Smash Burger, Chicken Wings.
 - **A count stays lowercase**: "3 meatballs each", "2 ribs per portion", "a hot dog".
 - Titles and headings use sentence case ("Set up once: My Prices"), except the three names the whole kit shares: The BBQ Hustle, Build the Business, Master the Smoke.
 - Tab, section and field names are written as they appear in the sheet, with their capitals.
@@ -76,5 +76,7 @@ Master set: the "2 BBQ Hustle" folder inside "BBQ Hustle - DELIVERY (staging)". 
 - To do (Google Docs, awaiting approval of the pilot): Welcome, the Table of Contents, and the other nine Master the Smoke chapters.
 - Leave alone: the Build the Business modules and worksheets (Word files, locked or approved; handled separately by the owner), and the Module 10 dashboard.
 - Any web page copy is out of scope for now.
+
+Page flow (documents): turn on widow/orphan control for the whole document; headings keep with the next paragraph and keep their lines together; short paragraphs (about 500 characters or less) keep their lines together, so they move to the next page instead of splitting. Use these settings instead of blank spacer paragraphs. Add a page break before a heading only when the owner asks.
 
 How a chapter is restyled: real heading styles replace bold-only lines, empty spacer paragraphs are removed (no text changes), and the text is otherwise left exactly as written.
