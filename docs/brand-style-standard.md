@@ -26,7 +26,7 @@ Applied so far: the Meat Cost Calculator (all tabs), its guide "How to Use the M
 | Element | Style |
 |---|---|
 | Page background | White (documents are printed, so no tint). Cream is for on-screen spreadsheets only |
-| Title (Heading 1) | Fraunces 28 pt, bold, Ink |
+| Title (Heading 1) | Fraunces 28 pt, bold, Ink, centered, with a 1.5 pt Ember rule underneath and 18 pt below. Master the Smoke chapters are titled "Master the Smoke - Chapter name" |
 | Subtitle | Work Sans 12 pt, italic, Muted |
 | Section heading (Heading 2) | Fraunces 18 pt, bold, Ember, 1.5 pt Ember rule underneath, 24 pt above, 8 pt below |
 | Sub-heading (Heading 3) | Fraunces 13 pt, bold, Ink, 14 pt above, 4 pt below |
