@@ -4,6 +4,7 @@
 // so thin and snapshot payloads both work. Safe to replay: all writes are idempotent.
 import { stripe, secrets, stripeMode, verifySignature } from '../_lib/stripe.js';
 import { BBQ, SCHEDULE_MONTHS } from '../_lib/bbq-config.js';
+import { isKitPurchase, kitEmail, sendEmail } from '../_lib/email.js';
 
 export async function onRequestPost({ request, env }) {
   const body = await request.text();
@@ -16,13 +17,16 @@ export async function onRequestPost({ request, env }) {
   const objectId = event.related_object?.id ?? event.data?.object?.id; // thin vs snapshot
   try {
     let subscriptionId = null;
+    let session = null;
     if (event.type === 'checkout.session.completed') {
-      const session = await stripe(env, 'GET', `/checkout/sessions/${objectId}`);
+      session = await stripe(env, 'GET', `/checkout/sessions/${objectId}`, { expand: ['line_items'] });
       if (session.mode === 'subscription') subscriptionId = session.subscription;
     } else if (event.type === 'customer.subscription.created') {
       subscriptionId = objectId;
     }
     if (subscriptionId) await ensureSchedule(env, subscriptionId);
+    // Email last: a failure above retries the whole event, and the Resend idempotency key stops a double send.
+    if (session) await sendKitEmail(env, session);
   } catch (err) {
     console.error(`webhook ${event.id}: ${err.message}`);
     return new Response('Retry', { status: 500 }); // Stripe retries
@@ -67,4 +71,14 @@ async function ensureSchedule(env, subscriptionId) {
   console.log(JSON.stringify({ audit: row }));
   // Optional durable log: bind a KV namespace named AUDIT to the Pages project.
   if (env.AUDIT) await env.AUDIT.put(`sched:${sub.id}`, JSON.stringify(row));
+}
+
+async function sendKitEmail(env, session) {
+  if (!isKitPurchase(session, BBQ[stripeMode(env)])) return;
+  const to = session.customer_details?.email;
+  if (!to) { console.error(`kit email: session ${session.id} has no email`); return; }
+  if (!env.KIT_DELIVERY_URL) throw new Error('Missing KIT_DELIVERY_URL');
+  const msg = kitEmail({ name: session.customer_details?.name, deliveryUrl: env.KIT_DELIVERY_URL });
+  const sent = await sendEmail(env, { to, ...msg, idempotencyKey: `hk-kit-email-${session.id}` });
+  console.log(JSON.stringify({ audit: { at: new Date().toISOString(), kitEmail: sent.id, session: session.id } }));
 }

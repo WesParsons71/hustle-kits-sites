@@ -34,3 +34,10 @@ export const BBQ = {
     couponRedeemBy: 1796101140,
   },
 };
+
+// Confirmation email (sent through Resend from the verified thebbqhustle.com domain).
+export const EMAIL = {
+  from: 'The BBQ Hustle <hello@thebbqhustle.com>',
+  replyTo: 'hello@thebbqhustle.com',
+  dfyFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSd6ooHgUzRo7xTx-HMmjc9ECLoAwZ-d2pufyRUbB79kYHgmGw/viewform?usp=header',
+};

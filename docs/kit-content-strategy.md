@@ -19,5 +19,5 @@ Decided October 28, 2026. The full outline lives in Drive: "BBQ Hustle – Kit O
 - A lower price on a second kit's topic package for existing Kit owners.
 
 ## Included with every kit purchase
-- A personalized 30-day social media calendar, delivered within 24 to 48 hours.
+- A personalized 30-day social media calendar, delivered within 3 to 5 business days.
 - Access to the private Facebook group (not yet created).

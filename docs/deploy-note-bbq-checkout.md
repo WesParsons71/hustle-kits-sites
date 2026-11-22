@@ -13,6 +13,9 @@
 | `STRIPE_MODE` | `test` (default) or `live` |
 | `STRIPE_SECRET_KEY_TEST` / `STRIPE_SECRET_KEY_LIVE` | secret keys |
 | `STRIPE_WEBHOOK_SECRET_TEST` / `STRIPE_WEBHOOK_SECRET_LIVE` | `whsec_...` per endpoint |
+| `RESEND_API_KEY` | secret. Must be set in **Production** as well as Preview |
+| `KIT_DELIVERY_URL` | the link to the Kit files, put in the confirmation email. The email is not sent without it |
+| `EMAIL_FROM` | optional, defaults to `The BBQ Hustle <hello@thebbqhustle.com>` |
 | `BOOSTERS_WELCOME_URL` | optional, defaults to `/boosters-welcome` |
 | `SITE_URL` | optional, defaults to the request origin |
 | `AUDIT` | optional KV binding for the audit log |
@@ -25,3 +28,14 @@ The project is direct-upload. From the repo root: `wrangler pages deploy bbq-hus
 ## Not yet verified (needs Stripe test mode)
 - Test-mode IDs in `bbq-config.js` are null: test mode needs its own products, prices and coupon.
 - Schedule creation + update via API, first-invoice $62 on combo, test-clock runs, webhook replay.
+
+## Kit confirmation email (Resend)
+- On `checkout.session.completed` for a paid Kit or combo session, the webhook sends one email through Resend with the Kit link and the Done For You form link. Boosters-only purchases get no Kit email.
+- Safe to replay: the Resend idempotency key is the Checkout Session id, and the email is the last step, so a retry after a schedule error cannot double-send.
+- If `RESEND_API_KEY` or `KIT_DELIVERY_URL` is missing, the webhook returns 500 and Stripe retries until it is set.
+- Sending domain: thebbqhustle.com. The DKIM record (`resend._domainkey`) and the `send.` SPF and MX records are published. No DMARC record yet.
+- Local check: `node tests/email.test.mjs`.
+
+## Not yet verified (email)
+- A real send from the Resend account, and the domain showing Verified in the Resend dashboard.
+- HubSpot: the strategy note says each buyer is also added to HubSpot. That is not built.
