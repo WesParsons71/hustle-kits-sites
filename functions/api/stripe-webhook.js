@@ -3,7 +3,7 @@
 // 12 monthly payments. Events are only a pointer: the full object is always fetched from the API,
 // so thin and snapshot payloads both work. Safe to replay: all writes are idempotent.
 import { stripe, secrets, stripeMode, verifySignature } from '../_lib/stripe.js';
-import { BBQ, SCHEDULE_MONTHS } from '../_lib/bbq-config.js';
+import { BBQ, EMAIL, SCHEDULE_MONTHS } from '../_lib/bbq-config.js';
 import { isKitPurchase, kitEmail, sendEmail } from '../_lib/email.js';
 
 export async function onRequestPost({ request, env }) {
@@ -77,8 +77,8 @@ async function sendKitEmail(env, session) {
   if (!isKitPurchase(session, BBQ[stripeMode(env)])) return;
   const to = session.customer_details?.email;
   if (!to) { console.error(`kit email: session ${session.id} has no email`); return; }
-  if (!env.KIT_DELIVERY_URL) throw new Error('Missing KIT_DELIVERY_URL');
-  const msg = kitEmail({ name: session.customer_details?.name, deliveryUrl: env.KIT_DELIVERY_URL });
+  const deliveryUrl = env.KIT_DELIVERY_URL || EMAIL.deliveryUrl;
+  const msg = kitEmail({ name: session.customer_details?.name, deliveryUrl });
   const sent = await sendEmail(env, { to, ...msg, idempotencyKey: `hk-kit-email-${session.id}` });
   console.log(JSON.stringify({ audit: { at: new Date().toISOString(), kitEmail: sent.id, session: session.id } }));
 }

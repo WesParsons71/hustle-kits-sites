@@ -39,5 +39,7 @@ export const BBQ = {
 export const EMAIL = {
   from: 'The BBQ Hustle <hello@thebbqhustle.com>',
   replyTo: 'hello@thebbqhustle.com',
+  // Shared Google Drive folder (view-only for anyone with the link). Override with the KIT_DELIVERY_URL env var.
+  deliveryUrl: 'https://drive.google.com/drive/folders/1hanhuMkNiE0sgYPLAQK9q-PU-W-MeBHW?usp=sharing',
   dfyFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSd6ooHgUzRo7xTx-HMmjc9ECLoAwZ-d2pufyRUbB79kYHgmGw/viewform?usp=header',
 };

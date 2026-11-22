@@ -14,7 +14,7 @@
 | `STRIPE_SECRET_KEY_TEST` / `STRIPE_SECRET_KEY_LIVE` | secret keys |
 | `STRIPE_WEBHOOK_SECRET_TEST` / `STRIPE_WEBHOOK_SECRET_LIVE` | `whsec_...` per endpoint |
 | `RESEND_API_KEY` | secret. Must be set in **Production** as well as Preview |
-| `KIT_DELIVERY_URL` | the link to the Kit files, put in the confirmation email. The email is not sent without it |
+| `KIT_DELIVERY_URL` | optional. Overrides the Kit link in the confirmation email. Defaults to the shared Drive folder set in `bbq-config.js` (`EMAIL.deliveryUrl`) |
 | `EMAIL_FROM` | optional, defaults to `The BBQ Hustle <hello@thebbqhustle.com>` |
 | `BOOSTERS_WELCOME_URL` | optional, defaults to `/boosters-welcome` |
 | `SITE_URL` | optional, defaults to the request origin |
@@ -32,7 +32,8 @@ The project is direct-upload. From the repo root: `wrangler pages deploy bbq-hus
 ## Kit confirmation email (Resend)
 - On `checkout.session.completed` for a paid Kit or combo session, the webhook sends one email through Resend with the Kit link and the Done For You form link. Boosters-only purchases get no Kit email.
 - Safe to replay: the Resend idempotency key is the Checkout Session id, and the email is the last step, so a retry after a schedule error cannot double-send.
-- If `RESEND_API_KEY` or `KIT_DELIVERY_URL` is missing, the webhook returns 500 and Stripe retries until it is set.
+- If `RESEND_API_KEY` is missing, the webhook returns 500 and Stripe retries until it is set.
+- Delivery is a shared Google Drive folder ("The BBQ Hustle Kit", view-only for anyone with the link). To rotate the link, change the sharing on the folder and update `EMAIL.deliveryUrl` or `KIT_DELIVERY_URL`. R2 with expiring links is still the longer-term plan.
 - Sending domain: thebbqhustle.com. The DKIM record (`resend._domainkey`) and the `send.` SPF and MX records are published. No DMARC record yet.
 - Local check: `node tests/email.test.mjs`.
 
